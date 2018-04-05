@@ -1,11 +1,14 @@
 package crypto.services;
 
+import crypto.exception.APIKeyNotFoundException;
 import crypto.mappers.CryptoMapper;
 import crypto.models.CryptoRoot;
 import crypto.models.HistoCrypto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
 
 @Service
 public class CryptoService {
@@ -15,6 +18,9 @@ public class CryptoService {
 
     @Autowired
     CryptoMapper cryptoMapper;
+
+    @Autowired
+    UserService userService;
 
 
     public CryptoRoot search(String fsym, String tsym, boolean persist) {
@@ -61,15 +67,19 @@ public class CryptoService {
         }
     }
 
-    public HistoCrypto[] getAllData(){
+    public ArrayList<HistoCrypto> getAllData(){
         return cryptoMapper.getAllData();
     }
 
-    public HistoCrypto[] getDataByFsym(String fsym){
-        return cryptoMapper.getDataByFsym(fsym);
+    public ArrayList<HistoCrypto> getDataByFsym (String fsym, String apiKey) throws APIKeyNotFoundException {
+        if (apiKey.equals(userService.getAllUser().contains(apiKey))) {
+            return cryptoMapper.getDataByFsym(fsym);
+        }else {
+            throw new APIKeyNotFoundException("Your API key is not valid");
+        }
     }
 
-    public HistoCrypto[] getDataByTsym(String tsym) {
+    public ArrayList<HistoCrypto> getDataByTsym(String tsym) {
         return cryptoMapper.getDataByTsym(tsym);
     }
 
