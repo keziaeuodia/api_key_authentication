@@ -1,4 +1,4 @@
-package crypto.models.user;
+package user.models.user;
 
 public class User {
 

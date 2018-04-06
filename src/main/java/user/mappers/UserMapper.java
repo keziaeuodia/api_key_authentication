@@ -1,7 +1,8 @@
-package crypto.mappers;
+package user.mappers;
 
 
-import crypto.models.user.User;
+import org.apache.ibatis.annotations.Delete;
+import user.models.user.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -17,7 +18,10 @@ public interface UserMapper {
     String GET_USER_BY_ID = "SELECT * FROM `Api_key_auth`.`register` WHERE `id` = #{id};";
     String GET_USER_BY_EMAIL = "SELECT * FROM `Api_key_auth`.`register` WHERE `email` = #{email};";
     String GET_EMAIL = "SELECT `email` FROM `Api_key_auth`.`register` WHERE `email` = #{email};";
-    String GET_ALL_USER = "SELECT * FROM `Api_key_auth`.`register`";
+    String GET_ALL_USER = "SELECT * FROM `Api_key_auth`.`register` WHERE `active` = 1";
+    String GET_USER_BY_APIKEY = "SELECT * FROM `Api_key_auth`.`register` WHERE `apiKey` = #{apiKey};";
+    String DELETE_USER_BY_EMAIL = "DELETE FROM `Api_key_auth`.`register`WHERE `email` = #{email};";
+    String DELETE_USER_BY_ID = "UPDATE `Api_key_auth`.`register`SET `active` = 0 WHERE `id` = #{id};";
 
     @Insert(INSERT_NEW_USER)
     public void insertUser(User user);
@@ -36,4 +40,10 @@ public interface UserMapper {
 
     @Select(GET_ALL_USER)
     public ArrayList<User> getAllUser();
+
+    @Select(GET_USER_BY_APIKEY)
+    public User getUserByKey(String apikey);
+
+    @Delete(DELETE_USER_BY_ID)
+    public void deleteUserById(int id);
 }

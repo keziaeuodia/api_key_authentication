@@ -1,15 +1,17 @@
-package crypto.exception;
+package user.exception;
+
+import org.springframework.http.HttpStatus;
 
 public class ExceptionResponse {
 
-    int status;
+    HttpStatus status;
     String message;
 
-    public int getStatus() {
+    public HttpStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(HttpStatus status) {
         this.status = status;
     }
 
