@@ -92,4 +92,15 @@ public class UserService {
 
     }
 
+    public User updateUserById(User user, String apikey) throws UserNotFoundException, APIKeyNotFoundException{
+        if (authenticateAPI(apikey)){
+            try {
+                user.setApiKey(generateApiKey(128));
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            userMapper.updateUserById(user);
+            return userMapper.getUserById(user.getId());
+        }else throw new UserNotFoundException("User not found");
+    }
 }

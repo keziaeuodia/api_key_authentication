@@ -47,5 +47,11 @@ public class UserController {
         return userService.deleteUserById(id,apikey);
     }
 
+    @PatchMapping("/{id}")
+    public User updateUserById(@RequestBody User user,
+                            @RequestParam (value = "APIKey") String apikey) throws UserNotFoundException, APIKeyNotFoundException {
+        return userService.updateUserById(user,apikey);
+    }
+
 
 }

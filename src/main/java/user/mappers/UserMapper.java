@@ -1,11 +1,8 @@
 package user.mappers;
 
 
-import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.*;
 import user.models.user.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
 
@@ -22,6 +19,9 @@ public interface UserMapper {
     String GET_USER_BY_APIKEY = "SELECT * FROM `Api_key_auth`.`register` WHERE `apiKey` = #{apiKey};";
     String DELETE_USER_BY_EMAIL = "DELETE FROM `Api_key_auth`.`register`WHERE `email` = #{email};";
     String DELETE_USER_BY_ID = "UPDATE `Api_key_auth`.`register`SET `active` = 0 WHERE `id` = #{id};";
+    String UPDATE_USER_BY_ID = "UPDATE `Api_key_auth`.`register` SET `id` = #{id},`firstName` = #{firstName}," +
+            "`lastName` = #{lastName},`email` = #{email},`password` = #{password},`apiKey` = #{apiKey}," +
+            "`active` = #{active} WHERE `id` = #{id};";
 
     @Insert(INSERT_NEW_USER)
     public void insertUser(User user);
@@ -46,4 +46,8 @@ public interface UserMapper {
 
     @Delete(DELETE_USER_BY_ID)
     public void deleteUserById(int id);
+
+    @Update(UPDATE_USER_BY_ID)
+    public void updateUserById(User user);
+
 }
