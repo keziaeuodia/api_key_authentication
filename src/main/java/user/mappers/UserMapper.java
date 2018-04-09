@@ -15,7 +15,7 @@ public interface UserMapper {
     String GET_USER_BY_ID = "SELECT * FROM `Api_key_auth`.`register` WHERE `id` = #{id};";
     String GET_USER_BY_EMAIL = "SELECT * FROM `Api_key_auth`.`register` WHERE `email` = #{email};";
     String GET_EMAIL = "SELECT `email` FROM `Api_key_auth`.`register` WHERE `email` = #{email};";
-    String GET_ALL_USER = "SELECT * FROM `Api_key_auth`.`register` WHERE `active` = 1";
+    String GET_ALL_ACTIVE_USER = "SELECT * FROM `Api_key_auth`.`register` WHERE `active` = 1";
     String GET_USER_BY_APIKEY = "SELECT * FROM `Api_key_auth`.`register` WHERE `apiKey` = #{apiKey};";
     String DELETE_USER_BY_EMAIL = "DELETE FROM `Api_key_auth`.`register`WHERE `email` = #{email};";
     String DELETE_USER_BY_ID = "UPDATE `Api_key_auth`.`register`SET `active` = 0 WHERE `id` = #{id};";
@@ -38,7 +38,7 @@ public interface UserMapper {
     @Select(GET_EMAIL)
     public String getEmail(String email);
 
-    @Select(GET_ALL_USER)
+    @Select(GET_ALL_ACTIVE_USER)
     public ArrayList<User> getAllUser();
 
     @Select(GET_USER_BY_APIKEY)

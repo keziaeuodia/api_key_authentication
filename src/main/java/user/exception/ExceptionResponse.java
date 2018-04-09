@@ -2,6 +2,7 @@ package user.exception;
 
 import org.springframework.http.HttpStatus;
 
+//this class shows error response in json format
 public class ExceptionResponse {
 
     HttpStatus status;
