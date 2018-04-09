@@ -6,7 +6,6 @@ import user.exception.UserNotFoundException;
 import user.mappers.UserMapper;
 import user.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.user.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.DatatypeConverter;

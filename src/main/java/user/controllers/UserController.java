@@ -1,6 +1,5 @@
 package user.controllers;
 
-import org.apache.ibatis.annotations.Delete;
 import user.exception.APIKeyNotFoundException;
 import user.exception.DuplicateUserException;
 import user.exception.UserNotFoundException;
@@ -18,10 +17,6 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
-//    @Autowired
-//    RestTemplate restTemplate;
-
 
     //register user
     @PostMapping("/")
